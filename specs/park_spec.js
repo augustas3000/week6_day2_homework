@@ -42,7 +42,8 @@ describe('Park', function() {
   it('should be able to remove a dinosaur from its collection', function(){
     park.add_dinosaur(apatosaurus);
     park.add_dinosaur(spinosaurus);
-    park.remove_dinosaur('Spinosaurus');
+
+    park.remove_dinosaur(spinosaurus);
 
     const expected = 'Apatosaurus';
     const actual = park.collection_of_dinosaurs[0].species;
@@ -97,5 +98,48 @@ describe('Park', function() {
     const actual = park.total_revenue_per_year();
     assert.strictEqual(actual,expected);
   });
+
+
+  it('should be able to remove all dinosaurs of a particular species', function() {
+    // return an array of indexes first
+    park.add_dinosaur(apatosaurus);
+    park.add_dinosaur(spinosaurus);
+
+    spinosaurus_2 = new Dinosaur('Spinosaurus', 'carnivore', 50);
+    tyrannosaurus = new Dinosaur('Tyrannosaurus','carnivore', 100);
+    brachiosaurus = new Dinosaur('Brachiosaurus','herbivore', 100);
+    park.add_dinosaur(spinosaurus_2);
+    park.add_dinosaur(tyrannosaurus);
+    park.add_dinosaur(brachiosaurus);
+
+    park.remove_by_spp_all('Spinosaurus');
+
+    const expected = [apatosaurus, tyrannosaurus, brachiosaurus];
+    const actual = park.collection_of_dinosaurs;
+    assert.deepStrictEqual(actual, expected);
+  });
+
+
+  it(' it should be able to provide an object containing each of the diet types and the number of dinosaurs in the park of that diet type', function() {
+    // { omnivore: 1, carnivore: 3, herbivore: 1 }
+
+    park.add_dinosaur(apatosaurus);
+    park.add_dinosaur(spinosaurus);
+
+    spinosaurus_2 = new Dinosaur('Spinosaurus', 'carnivore', 50);
+    tyrannosaurus = new Dinosaur('Tyrannosaurus','carnivore', 100);
+    brachiosaurus = new Dinosaur('Brachiosaurus','herbivore', 100);
+    park.add_dinosaur(spinosaurus_2);
+    park.add_dinosaur(tyrannosaurus);
+    park.add_dinosaur(brachiosaurus);
+
+    const actual = park.diet_summary();
+    const expected = { omnivore: 1, carnivore: 3, herbivore: 1 };
+
+    assert.deepStrictEqual(actual, expected);
+
+  });
+
+
 
 });
