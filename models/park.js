@@ -20,12 +20,13 @@ Park.prototype.add_dinosaur = function(dino_obj) {
 
 Park.prototype.remove_dinosaur = function(dino_obj){
   this.collection_of_dinosaurs.splice(this.collection_of_dinosaurs.indexOf(dino_obj), 1);
-
 };
 
 // Find the dinosaur that attracts the most visitors
 Park.prototype.most_visitors = function() {
   this.collection_of_dinosaurs.length
+  // can use a hash like highest = {guestsAttractedPerDay: 0}
+  // to make this shorter;
   let current_max = 0;
   let best_one;
   for (let i = 0; i < this.collection_of_dinosaurs.length; i++) {
@@ -46,7 +47,12 @@ Park.prototype.all_by_spp = function(species_str) {
     }
   }
   return dinos_found;
+
+  // let result = this.collection_of_dinosaurs.filter(dinosaur => dinosaur.species == species); One liner - NICE;
+
 };
+
+
 // Calculate the total number of visitors per day
 Park.prototype.total_visitors = function() {
   let tot_visitors = 0;
@@ -89,6 +95,9 @@ Park.prototype.remove_by_spp_all = function(spp_string) {
   };
 
  this.collection_of_dinosaurs = collection_filtered;
+
+  // let result = this.collection_of_dinosaurs.filter(dinosaur => dinosaur.species !== spp_string); One liner - NICE;
+
 };
 
 
@@ -116,5 +125,5 @@ Park.prototype.diet_summary = function() {
   return diet_summary;
 };
 
-
+// to enable require in park_spec.js
 module.exports = Park;

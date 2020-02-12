@@ -28,6 +28,7 @@ describe('Park', function() {
     park.add_dinosaur(spinosaurus);
     const actual = park.collection_of_dinosaurs;
     const expected = [apatosaurus, spinosaurus];
+    // deep ensures that the two array don't need to be the same id (same location in memory) to match, as long as their contents are strictly equal (StrictEqual)
     assert.deepStrictEqual(actual, expected);
   });
 
